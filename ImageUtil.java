@@ -1,4 +1,3 @@
-package com.rjchakraborty.withu.util;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,21 +24,12 @@ import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
-import androidx.core.widget.NestedScrollView;
 
-import com.bumptech.glide.load.resource.gif.GifDrawable;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.rjchakraborty.withu.BuildConfig;
-import com.rjchakraborty.withu.R;
-import com.rjchakraborty.withu.application.WITHU;
-import com.rjchakraborty.withu.listeners.AppConstants;
-import com.rjchakraborty.withu.listeners.MoodConstants;
-import com.rjchakraborty.withu.model.Content;
-import com.rjchakraborty.withu.modules.customviews.CustomTextView;
+
+import com.example.imageutilities.BuildConfig;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -55,153 +45,16 @@ import java.net.URL;
 
 
 /**
- * Created by RJ Chakraborty on 12-02-2018.
+ * Created by RJ Chakraborty on 29-05-2019.
  */
 
 public class ImageUtil {
 
-
-    public static int getMoodState(Context context, long state, CustomTextView tv_mood, boolean isMe) {
-        switch ((int) state) {
-            case MoodConstants.HAPPY:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_happy));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.happy)));
-                    }
-                }
-                return R.drawable.happy;
-            case MoodConstants.ANGRY:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_angry));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.angry)));
-                    }
-                }
-                return R.drawable.angry;
-            case MoodConstants.CONFUSE:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_confuse));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.confuse)));
-                    }
-                }
-                return R.drawable.confuse;
-            case MoodConstants.LOVE:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_love));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string._love)));
-                    }
-                }
-                return R.drawable.love;
-            case MoodConstants.NERVOUS:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_nervous));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.nervous)));
-                    }
-                }
-                return R.drawable.nervous;
-            case MoodConstants.SAD:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_sad));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.sad)));
-                    }
-                }
-                return R.drawable.sad;
-            case MoodConstants.CALM:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_calm));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.calm)));
-                    }
-                }
-                return R.drawable.calm;
-            case MoodConstants.COOL:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_cool));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.cool)));
-                    }
-                }
-                return R.drawable.cool;
-            case MoodConstants.CRY:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_cry));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.cry)));
-                    }
-                }
-                return R.drawable.cry;
-            case MoodConstants.SURPRISE:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_surprise));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.surprise)));
-                    }
-                }
-                return R.drawable.surprise;
-            case MoodConstants.KISS:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_kiss_string));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.kiss_string)));
-                    }
-                }
-                return R.drawable.kiss;
-            case MoodConstants.LISTEN_SONG:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_listen_song));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.listen_song)));
-                    }
-                }
-                return R.drawable.listensong;
-            case MoodConstants.SICK:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_sick));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.sick)));
-                    }
-                }
-                return R.drawable.sick;
-            case MoodConstants.SLEEP:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_sleep));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string.sleep)));
-                    }
-                }
-                return R.drawable.sleep;
-            default:
-                if(tv_mood != null){
-                    if(isMe) {
-                        tv_mood.setText(context.getString(R.string.me_love));
-                    }else{
-                        tv_mood.setText(String.format("%s %s", tv_mood.getText(), context.getString(R.string._love)));
-                    }
-                }
-                return R.drawable.love;
-
-        }
-    }
-
+    /**
+     * This method returns Gif File in byte array
+     * @param gifFile
+     * @return
+     */
     public static byte[] getGifinBytes(File gifFile) {
         byte[] outputGifBaos = null;
         if (gifFile != null && gifFile.exists()) {
@@ -214,26 +67,34 @@ public class ImageUtil {
     }
 
 
+    /**
+     * Decode base64Binary String to bytes
+     * @param encodedString
+     * @return
+     */
     public static Bitmap decodeBase64BinaryToBytes(String encodedString) {
         String pureBase64Encoded = encodedString.trim().substring(encodedString.trim().indexOf(",") + 1);
         byte[] imageBytes = Base64.decode(pureBase64Encoded.trim(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
     }
 
-    public static String encodeFileToBase64Binary(String filePath) {
-        byte[] bytes = FileUtil.readFile2BytesByStream(filePath);
-        byte[] encoded = Base64.encode(bytes, Base64.NO_WRAP);
-        return new String(encoded);
-    }
 
+    /**
+     * Encode Bytes to Base64 Binary String
+     * @param image
+     * @return
+     */
     public static String encodeBytesToBase64Binary(byte[] image) {
         byte[] encoded = Base64.encode(image, Base64.NO_WRAP);
         return new String(encoded);
     }
 
-    /*
-     *To get a Bitmap image from the URL received
-     * */
+
+    /**
+     * To get a Bitmap image from the URL received
+     * @param imageUrl
+     * @return
+     */
     public static Bitmap getBitmapfromUrl(Uri imageUrl) {
         try {
             URL url = new URL(imageUrl.toString());
@@ -248,8 +109,14 @@ public class ImageUtil {
         }
     }
 
-
-    public static Bitmap getCircularBitmapWithWhiteBorder(Bitmap bitmap, int borderWidth) {
+    /**
+     * Circular bitmap Image like you see in Whatsapp live location
+     * @param bitmap
+     * @param borderWidth
+     * @param borderColor
+     * @return
+     */
+    public static Bitmap getCircularBitmapWithWhiteBorder(Bitmap bitmap, int borderWidth, int borderColor) {
         if (bitmap == null || bitmap.isRecycled()) {
             return null;
         }
@@ -264,32 +131,19 @@ public class ImageUtil {
         paint.setShader(shader);
         Canvas canvas = new Canvas(canvasBitmap);
         float radius = width > height ? ((float) height) / 2f : ((float) width) / 2f;
-        canvas.drawCircle(width / 2, height / 2, radius, paint);
+        canvas.drawCircle(width / 2.0f, height / 2.0f, radius, paint);
         if (borderWidth > 0) {
             paint.setShader(null);
             paint.setStyle(Paint.Style.STROKE);
-            paint.setColor(ContextCompat.getColor(WITHU.getAppContext(), R.color.colorPrimaryLight));
+            paint.setColor(borderColor);
             paint.setStrokeWidth(borderWidth);
             //paint.setShadowLayer(4.0f, 0, 0, Color.BLACK);
-            canvas.drawCircle(width / 2, height / 2, radius - borderWidth / 2, paint);
+            canvas.drawCircle(width / 2.0f, height / 2.0f, radius - borderWidth / 2.0f, paint);
         }
         return canvasBitmap;
     }
 
-    public static double mapValueFromRangeToRange(double value, double fromLow, double fromHigh, double toLow, double toHigh) {
-        double progress = ((value - fromLow) / (fromHigh - fromLow) * (toHigh - toLow));
 
-        return toLow + progress;
-    }
-
-    public static double clamp(double value, double low, double high) {
-        return Math.min(Math.max(value, low), high);
-    }
-
-    public static int getDotSize(int maximumuValue) {
-        int a = 100;
-        return ((maximumuValue / a) + 1) * 5;
-    }
 
     private static byte[] readBytes(File file) {
         int size = (int) file.length();
@@ -315,10 +169,16 @@ public class ImageUtil {
         bos.close();
     }
 
-    public static byte[] getBlurredThumbnail(Bitmap inputBitmap) {
+    /**
+     * Get a Blurred Thumbnail from a bitmap as placeholder before downloading the original image
+     * @param context
+     * @param inputBitmap
+     * @return
+     */
+    public static byte[] getBlurredThumbnail(Context context, Bitmap inputBitmap) {
         if (inputBitmap != null) {
             Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
-            RenderScript rs = RenderScript.create(WITHU.getAppContext());
+            RenderScript rs = RenderScript.create(context);
             ScriptIntrinsicBlur theIntrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
             Allocation tmpIn = Allocation.createFromBitmap(rs, inputBitmap);
             Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
@@ -336,19 +196,20 @@ public class ImageUtil {
         return null;
     }
 
-    public static Bitmap getBitmap(String filePath) {
-        return ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Images.Thumbnails.MINI_KIND);
-    }
-
-
-    public static String createThumbnailFromPath(String filePath) {
+    /**
+     * it will create thumbnail from a video path
+     * @param context
+     * @param filePath
+     * @return
+     */
+    public static String createThumbnailFromPath(Context context, String filePath) {
         String returnPath = null;
         try {
             Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Images.Thumbnails.MINI_KIND);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.WEBP, 30, baos);
-            String path = MediaStore.Images.Media.insertImage(WITHU.getAppContext().getContentResolver(), bitmap, "Title", null);
-            Cursor cursor = WITHU.getAppContext().getContentResolver().query(Uri.parse(path), null, null, null, null);
+            String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), bitmap, "Title", null);
+            Cursor cursor = context.getContentResolver().query(Uri.parse(path), null, null, null, null);
             if (cursor != null) {
                 cursor.moveToFirst();
                 int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
@@ -362,8 +223,16 @@ public class ImageUtil {
     }
 
 
+    /**
+     * Save the bitmap into phone's local storage
+     * @param context
+     * @param bitmap
+     * @return
+     */
     public static File saveDrawingBitmap(Context context, Bitmap bitmap) {
-        File photo = new File(getAppFolder(context), "WITHU_Drawing_" + SystemClock.currentThreadTimeMillis() + ".png");
+        if(context == null)
+            return null;
+        File photo = new File(getAppFolder(context), "Drawing_" + SystemClock.currentThreadTimeMillis() + ".png");
         try {
             FileOutputStream fos = null;
             if (photo != null) {
@@ -408,33 +277,18 @@ public class ImageUtil {
         return null;
     }
 
-
-    public static void saveToInternalStorage(final Bitmap bitmap, final String name) {
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                FileOutputStream faos;
-                try {
-                    faos = WITHU.getAppContext().openFileOutput(name, Context.MODE_PRIVATE);
-                    if (name.endsWith("png")) {
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 80, faos);
-                    } else if (name.endsWith("webp")) {
-                        bitmap.compress(Bitmap.CompressFormat.WEBP, 80, faos);
-                    } else {
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, faos);
-                    }
-                    faos.close();
-                } catch (Exception e) {
-                    Log.e("saveToInternalStorage()", e.getMessage());
-                }
-            }
-        });
-    }
-
-    public static Bitmap loadImageFromStorage(String name) {
+    /**
+     * Load Image from local storage using filePath
+     * @param context
+     * @param filePath
+     * @return
+     */
+    public static Bitmap loadImageFromStorage(Context context, String filePath) {
+        if(context == null)
+            return null;
         try {
-            File filePath = WITHU.getAppContext().getFileStreamPath(name);
-            FileInputStream fi = new FileInputStream(filePath);
+            File file = context.getFileStreamPath(filePath);
+            FileInputStream fi = new FileInputStream(file);
             return BitmapFactory.decodeStream(fi);
         } catch (Exception ex) {
             return null;
@@ -472,136 +326,11 @@ public class ImageUtil {
 
     }
 
-    public static String getLocalPathFromBitmap(Content content, Context context, Bitmap bitmap) {
-        File photo = new File(getAppFolder(context), SystemClock.currentThreadTimeMillis() + ".jpg");
-        String image_name = FileUtil.getFireStorageMediaName(content);
-        if (image_name != null) {
-            if (image_name.equalsIgnoreCase("local_upload")) {
-                photo = new File(content.getContent());
-            } else {
-                switch (content.getCType()) {
-                    case AppConstants.RIGHT_PHOTO:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_IMAGE_SENT, image_name);
-                        break;
-                    case AppConstants.RIGHT_VIDEO:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_VIDEO_SENT, image_name);
-                        break;
-                    case AppConstants.LEFT_PHOTO:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_IMAGE, image_name);
-                        break;
-                    case AppConstants.LEFT_VIDEO:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_VIDEO, image_name);
-                        break;
-                    case AppConstants.RIGHT_STICKER:
-                    case AppConstants.LEFT_STICKER:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_STICKER, image_name);
-                        break;
-                }
-            }
-
-            try {
-
-                FileOutputStream fos = null;
-                if (photo != null) {
-                    fos = new FileOutputStream(photo.getPath());
-
-                    if (image_name.endsWith("png")) {
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                    } else if (image_name.endsWith("webp")) {
-                        bitmap.compress(Bitmap.CompressFormat.WEBP, 100, fos);
-                    } else {
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                    }
-
-                    fos.close();
-                    if (photo.exists()) {
-                        ContentValues values = new ContentValues();
-
-                        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-                        if (image_name.endsWith("png")) {
-                            values.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
-                        } else {
-                            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
-                        }
-
-                        values.put(MediaStore.MediaColumns.DATA, photo.getAbsolutePath());
-                        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                    }
-                }
-
-            } catch (Exception e) {
-                Log.e("Picture", "Exception in photoCallback", e);
-            }
-        }
-
-        if (photo != null && photo.exists()) {
-            return photo.getAbsolutePath();
-        } else {
-            Uri fileUri = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.error_icon_padding_large);
-            photo = new File(fileUri.getPath());
-            if (photo != null && photo.exists()) {
-                return photo.getAbsolutePath();
-            } else {
-                return "https://firebasestorage.googleapis.com/v0/b/withu-e9868.appspot.com/o/admin_feed%2Ferror.png?alt=media&token=82dc562b-f5b8-4e6e-a5c0-9dda763e00b6";
-            }
-        }
-    }
-
-
-    public static String getLocalPathFromGif(Content content, Context context, GifDrawable gifDrawable) {
-        File photo = new File(getAppFolder(context), SystemClock.currentThreadTimeMillis() + ".gif");
-        String image_name = FileUtil.getFireStorageMediaName(content);
-        if (image_name != null) {
-            if (image_name.equalsIgnoreCase("local_upload")) {
-                photo = new File(content.getContent());
-            } else {
-                switch (content.getCType()) {
-                    case AppConstants.RIGHT_PHOTO:
-                    case AppConstants.RIGHT_VIDEO:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_GIF_SENT, image_name);
-                        break;
-                    case AppConstants.LEFT_PHOTO:
-                    case AppConstants.LEFT_VIDEO:
-                        photo = FileUtil.getOutputMediaFile(FileUtil.MEDIA_TYPE_GIF, image_name);
-                        break;
-                }
-            }
-
-            try {
-
-                if (photo != null) {
-                    GifUtil.Companion.gifDrawableToFile(gifDrawable, photo);
-                    if (photo.exists()) {
-                        ContentValues values = new ContentValues();
-
-                        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis());
-                        if (image_name.endsWith(".gif")) {
-                            values.put(MediaStore.Images.Media.MIME_TYPE, "image/gif");
-                        }
-
-                        values.put(MediaStore.MediaColumns.DATA, photo.getAbsolutePath());
-                        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-                    }
-                }
-
-            } catch (Exception e) {
-                Log.e("Picture", "Exception in photoCallback", e);
-            }
-        }
-
-        if (photo != null && photo.exists()) {
-            return photo.getAbsolutePath();
-        } else {
-            Uri fileUri = Uri.parse("android.resource://" + BuildConfig.APPLICATION_ID + "/" + R.drawable.error_icon_padding_large);
-            photo = new File(fileUri.getPath());
-            if (photo != null && photo.exists()) {
-                return photo.getAbsolutePath();
-            } else {
-                return "https://firebasestorage.googleapis.com/v0/b/withu-e9868.appspot.com/o/admin_feed%2Ferror.png?alt=media&token=82dc562b-f5b8-4e6e-a5c0-9dda763e00b6";
-            }
-        }
-    }
-
+    /**
+     * Check if a Drawable is Empty or Null
+     * @param iv
+     * @return
+     */
     public static boolean hasNullOrEmptyDrawable(AppCompatImageView iv) {
         Drawable drawable = iv.getDrawable();
         BitmapDrawable bitmapDrawable = drawable instanceof BitmapDrawable ? (BitmapDrawable) drawable : null;
